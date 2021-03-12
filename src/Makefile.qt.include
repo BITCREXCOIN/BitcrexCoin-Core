@@ -1,0 +1,860 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/bitcrexcoin-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# bitcrexcoin qt core #
+QT_TS = \
+  qt/locale/bitcrexcoin_bg.ts \
+  qt/locale/bitcrexcoin_ca.ts \
+  qt/locale/bitcrexcoin_cs.ts \
+  qt/locale/bitcrexcoin_da.ts \
+  qt/locale/bitcrexcoin_de.ts \
+  qt/locale/bitcrexcoin_en.ts \
+  qt/locale/bitcrexcoin_en_GB.ts \
+  qt/locale/bitcrexcoin_en_US.ts \
+  qt/locale/bitcrexcoin_eo.ts \
+  qt/locale/bitcrexcoin_es.ts \
+  qt/locale/bitcrexcoin_es_ES.ts \
+  qt/locale/bitcrexcoin_fi.ts \
+  qt/locale/bitcrexcoin_fr_FR.ts \
+  qt/locale/bitcrexcoin_hi_IN.ts \
+  qt/locale/bitcrexcoin_hr.ts \
+  qt/locale/bitcrexcoin_hr_HR.ts \
+  qt/locale/bitcrexcoin_it.ts \
+  qt/locale/bitcrexcoin_ja.ts \
+  qt/locale/bitcrexcoin_ko_KR.ts \
+  qt/locale/bitcrexcoin_lt_LT.ts \
+  qt/locale/bitcrexcoin_nl.ts \
+  qt/locale/bitcrexcoin_pl.ts \
+  qt/locale/bitcrexcoin_pt.ts \
+  qt/locale/bitcrexcoin_pt_BR.ts \
+  qt/locale/bitcrexcoin_ro_RO.ts \
+  qt/locale/bitcrexcoin_ru.ts \
+  qt/locale/bitcrexcoin_sk.ts \
+  qt/locale/bitcrexcoin_sv.ts \
+  qt/locale/bitcrexcoin_tr.ts \
+  qt/locale/bitcrexcoin_uk.ts \
+  qt/locale/bitcrexcoin_vi.ts \
+  qt/locale/bitcrexcoin_zh_CN.ts \
+  qt/locale/bitcrexcoin_zh_TW.ts
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/blockexplorer.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/governancepage.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/bitcrexcoin/forms/loadingdialog.ui \
+  qt/forms/zbiccontroldialog.ui \
+  qt/bitcrexcoin/forms/snackbar.ui \
+  qt/bitcrexcoin/forms/navmenuwidget.ui \
+  qt/bitcrexcoin/forms/lockunlock.ui \
+  qt/bitcrexcoin/forms/expandablebutton.ui \
+  qt/bitcrexcoin/forms/receivedialog.ui \
+  qt/bitcrexcoin/forms/walletpassworddialog.ui \
+  qt/bitcrexcoin/forms/topbar.ui \
+  qt/bitcrexcoin/forms/txrow.ui \
+  qt/bitcrexcoin/forms/dashboardwidget.ui \
+  qt/bitcrexcoin/forms/coincontrolbicwidget.ui \
+  qt/bitcrexcoin/forms/addresslabelrow.ui \
+  qt/bitcrexcoin/forms/contactdropdownrow.ui \
+  qt/bitcrexcoin/forms/mninfodialog.ui \
+  qt/bitcrexcoin/forms/optionbutton.ui \
+  qt/bitcrexcoin/forms/masternodewizarddialog.ui \
+  qt/bitcrexcoin/forms/mnrow.ui \
+  qt/bitcrexcoin/forms/masternodeswidget.ui \
+  qt/bitcrexcoin/forms/myaddressrow.ui \
+  qt/bitcrexcoin/forms/csrow.ui \
+  qt/bitcrexcoin/forms/sendchangeaddressdialog.ui \
+  qt/bitcrexcoin/forms/sendconfirmdialog.ui \
+  qt/bitcrexcoin/forms/sendcustomfeedialog.ui \
+  qt/bitcrexcoin/forms/sendchangeaddressdialog.ui \
+  qt/bitcrexcoin/forms/sendmultirow.ui \
+  qt/bitcrexcoin/forms/send.ui \
+  qt/bitcrexcoin/forms/addnewaddressdialog.ui \
+  qt/bitcrexcoin/forms/addnewcontactdialog.ui \
+  qt/bitcrexcoin/forms/requestdialog.ui \
+  qt/bitcrexcoin/forms/receivewidget.ui \
+  qt/bitcrexcoin/forms/tooltipmenu.ui \
+  qt/bitcrexcoin/forms/addresseswidget.ui \
+  qt/bitcrexcoin/forms/defaultdialog.ui \
+  qt/bitcrexcoin/forms/denomgenerationdialog.ui \
+  qt/bitcrexcoin/forms/privacywidget.ui \
+  qt/bitcrexcoin/forms/coldstakingwidget.ui \
+  qt/bitcrexcoin/settings/forms/settingsbackupwallet.ui \
+  qt/bitcrexcoin/settings/forms/settingsbittoolwidget.ui \
+  qt/bitcrexcoin/settings/forms/settingsconsolewidget.ui \
+  qt/bitcrexcoin/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/bitcrexcoin/settings/forms/settingsfaqwidget.ui \
+  qt/bitcrexcoin/settings/forms/settingsinformationwidget.ui \
+  qt/bitcrexcoin/settings/forms/settingsmainoptionswidget.ui \
+  qt/bitcrexcoin/settings/forms/settingsmultisenddialog.ui \
+  qt/bitcrexcoin/settings/forms/settingsmultisendwidget.ui \
+  qt/bitcrexcoin/settings/forms/settingssignmessagewidgets.ui \
+  qt/bitcrexcoin/settings/forms/settingswalletoptionswidget.ui \
+  qt/bitcrexcoin/settings/forms/settingswalletrepairwidget.ui \
+  qt/bitcrexcoin/settings/forms/settingswidget.ui \
+  qt/bitcrexcoin/forms/welcomecontentwidget.ui \
+  qt/bitcrexcoin/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/moc_bitcoinamountfield.cpp \
+  qt/bitcrexcoin/moc_bitcrexcoingui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_blockexplorer.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_governancepage.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_proposalframe.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_splashscreen.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactiondesc.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/bitcrexcoin/moc_loadingdialog.cpp \
+  qt/moc_zbiccontroldialog.cpp \
+  qt/bitcrexcoin/moc_pwidget.cpp \
+  qt/bitcrexcoin/moc_snackbar.cpp \
+  qt/bitcrexcoin/moc_navmenuwidget.cpp \
+  qt/bitcrexcoin/moc_lockunlock.cpp \
+  qt/bitcrexcoin/moc_expandablebutton.cpp \
+  qt/bitcrexcoin/moc_furabstractlistitemdelegate.cpp \
+  qt/bitcrexcoin/moc_receivedialog.cpp \
+  qt/bitcrexcoin/moc_walletpassworddialog.cpp \
+  qt/bitcrexcoin/moc_pfborderimage.cpp \
+  qt/bitcrexcoin/moc_topbar.cpp \
+  qt/bitcrexcoin/moc_txrow.cpp \
+  qt/bitcrexcoin/moc_dashboardwidget.cpp \
+  qt/bitcrexcoin/moc_coincontrolbicwidget.cpp \
+  qt/bitcrexcoin/moc_addresslabelrow.cpp \
+  qt/bitcrexcoin/moc_contactdropdownrow.cpp \
+  qt/bitcrexcoin/moc_mninfodialog.cpp \
+  qt/bitcrexcoin/moc_optionbutton.cpp \
+  qt/bitcrexcoin/moc_coldstakingmodel.cpp \
+  qt/bitcrexcoin/moc_mnmodel.cpp \
+  qt/bitcrexcoin/moc_masternodewizarddialog.cpp \
+  qt/bitcrexcoin/moc_mnrow.cpp \
+  qt/bitcrexcoin/moc_masternodeswidget.cpp \
+  qt/bitcrexcoin/moc_myaddressrow.cpp \
+  qt/bitcrexcoin/moc_csrow.cpp \
+  qt/bitcrexcoin/moc_contactsdropdown.cpp \
+  qt/bitcrexcoin/moc_sendchangeaddressdialog.cpp \
+  qt/bitcrexcoin/moc_sendconfirmdialog.cpp \
+  qt/bitcrexcoin/moc_sendcustomfeedialog.cpp \
+  qt/bitcrexcoin/moc_sendchangeaddressdialog.cpp \
+  qt/bitcrexcoin/moc_sendmultirow.cpp \
+  qt/bitcrexcoin/moc_send.cpp \
+  qt/bitcrexcoin/moc_addnewaddressdialog.cpp \
+  qt/bitcrexcoin/moc_addnewcontactdialog.cpp \
+  qt/bitcrexcoin/moc_requestdialog.cpp \
+  qt/bitcrexcoin/moc_receivewidget.cpp \
+  qt/bitcrexcoin/moc_tooltipmenu.cpp \
+  qt/bitcrexcoin/moc_addresseswidget.cpp \
+  qt/bitcrexcoin/moc_defaultdialog.cpp \
+  qt/bitcrexcoin/moc_denomgenerationdialog.cpp \
+  qt/bitcrexcoin/moc_privacywidget.cpp \
+  qt/bitcrexcoin/moc_coldstakingwidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingsbackupwallet.cpp \
+  qt/bitcrexcoin/settings/moc_settingsbittoolwidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingsconsolewidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingsfaqwidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingsinformationwidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingsmainoptionswidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingsmultisenddialog.cpp \
+  qt/bitcrexcoin/settings/moc_settingsmultisendwidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingssignmessagewidgets.cpp \
+  qt/bitcrexcoin/settings/moc_settingswalletoptionswidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingswalletrepairwidget.cpp \
+  qt/bitcrexcoin/settings/moc_settingswidget.cpp \
+  qt/bitcrexcoin/moc_welcomecontentwidget.cpp \
+  qt/bitcrexcoin/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/bitcrexcoin.moc \
+  qt/bitcoinamountfield.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/bitcrexcoin/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_bitcrexcoin.cpp
+QT_QRC = qt/bitcrexcoin.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_bitcrexcoin_locale.cpp
+QT_QRC_LOCALE = qt/bitcrexcoin_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/bitcoinamountfield.h \
+  qt/bitcrexcoin/bitcrexcoingui.h \
+  qt/bitcoinunits.h \
+  qt/blockexplorer.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/governancepage.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/proposalframe.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/splashscreen.h \
+  qt/trafficgraphwidget.h \
+  qt/transactiondesc.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/bitcrexcoin/prunnable.h \
+  qt/bitcrexcoin/pfborderimage.h \
+  qt/bitcrexcoin/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/zbiccontroldialog.h \
+  qt/bitcrexcoin/pwidget.h \
+  qt/bitcrexcoin/guitransactionsutils.h \
+  qt/bitcrexcoin/snackbar.h \
+  qt/bitcrexcoin/navmenuwidget.h \
+  qt/bitcrexcoin/lockunlock.h \
+  qt/bitcrexcoin/receivedialog.h \
+  qt/bitcrexcoin/furlistrow.h \
+  qt/bitcrexcoin/furabstractlistitemdelegate.h \
+  qt/bitcrexcoin/txviewholder.h \
+  qt/bitcrexcoin/qtutils.h \
+  qt/bitcrexcoin/expandablebutton.h \
+  qt/bitcrexcoin/walletpassworddialog.h \
+  qt/bitcrexcoin/topbar.h \
+  qt/bitcrexcoin/txrow.h \
+  qt/bitcrexcoin/addressholder.h \
+  qt/bitcrexcoin/addressfilterproxymodel.h \
+  qt/bitcrexcoin/dashboardwidget.h \
+  qt/bitcrexcoin/coincontrolbicwidget.h \
+  qt/bitcrexcoin/addresslabelrow.h \
+  qt/bitcrexcoin/contactdropdownrow.h \
+  qt/bitcrexcoin/mninfodialog.h \
+  qt/bitcrexcoin/optionbutton.h \
+  qt/bitcrexcoin/coldstakingmodel.h \
+  qt/bitcrexcoin/mnmodel.h \
+  qt/bitcrexcoin/masternodewizarddialog.h \
+  qt/bitcrexcoin/mnrow.h \
+  qt/bitcrexcoin/masternodeswidget.h \
+  qt/bitcrexcoin/myaddressrow.h \
+  qt/bitcrexcoin/csrow.h \
+  qt/bitcrexcoin/contactsdropdown.h \
+  qt/bitcrexcoin/sendchangeaddressdialog.h \
+  qt/bitcrexcoin/sendconfirmdialog.h \
+  qt/bitcrexcoin/sendcustomfeedialog.h \
+  qt/bitcrexcoin/sendchangeaddressdialog.h \
+  qt/bitcrexcoin/sendmultirow.h \
+  qt/bitcrexcoin/send.h \
+  qt/bitcrexcoin/addnewaddressdialog.h \
+  qt/bitcrexcoin/addnewcontactdialog.h \
+  qt/bitcrexcoin/requestdialog.h \
+  qt/bitcrexcoin/receivewidget.h \
+  qt/bitcrexcoin/tooltipmenu.h \
+  qt/bitcrexcoin/addresseswidget.h \
+  qt/bitcrexcoin/defaultdialog.h \
+  qt/bitcrexcoin/denomgenerationdialog.h \
+  qt/bitcrexcoin/privacywidget.h \
+  qt/bitcrexcoin/coldstakingwidget.h \
+  qt/bitcrexcoin/settings/settingsbackupwallet.h \
+  qt/bitcrexcoin/settings/settingsbittoolwidget.h \
+  qt/bitcrexcoin/settings/settingsconsolewidget.h \
+  qt/bitcrexcoin/settings/settingsdisplayoptionswidget.h \
+  qt/bitcrexcoin/settings/settingsfaqwidget.h \
+  qt/bitcrexcoin/settings/settingsinformationwidget.h \
+  qt/bitcrexcoin/settings/settingsmainoptionswidget.h \
+  qt/bitcrexcoin/settings/settingsmultisenddialog.h \
+  qt/bitcrexcoin/settings/settingsmultisendwidget.h \
+  qt/bitcrexcoin/settings/settingssignmessagewidgets.h \
+  qt/bitcrexcoin/settings/settingswalletoptionswidget.h \
+  qt/bitcrexcoin/settings/settingswalletrepairwidget.h \
+  qt/bitcrexcoin/settings/settingswidget.h \
+  qt/bitcrexcoin/welcomecontentwidget.h \
+  qt/bitcrexcoin/splash.h
+
+RES_ICONS = \
+  qt/res/icons/add.png \
+  qt/res/icons/address-book.png \
+  qt/res/icons/automint_active.png \
+  qt/res/icons/automint_inactive.png \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/browse.png \
+  qt/res/icons/clock1.png \
+  qt/res/icons/clock2.png \
+  qt/res/icons/clock3.png \
+  qt/res/icons/clock4.png \
+  qt/res/icons/clock5.png \
+  qt/res/icons/configure.png \
+  qt/res/icons/connect0_16.png \
+  qt/res/icons/connect1_16.png \
+  qt/res/icons/connect2_16.png \
+  qt/res/icons/connect3_16.png \
+  qt/res/icons/connect4_16.png \
+  qt/res/icons/debugwindow.png \
+  qt/res/icons/edit.png \
+  qt/res/icons/editcopy.png \
+  qt/res/icons/editpaste.png \
+  qt/res/icons/explorer.png \
+  qt/res/icons/export.png \
+  qt/res/icons/eye.png \
+  qt/res/icons/eye_minus.png \
+  qt/res/icons/eye_plus.png \
+  qt/res/icons/filesave.png \
+  qt/res/icons/history.png \
+  qt/res/icons/key.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/masternodes.png \
+  qt/res/icons/onion.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/qrcode.png \
+  qt/res/icons/quit.png \
+  qt/res/icons/receive.png \
+  qt/res/icons/receive_dark.png \
+  qt/res/icons/privacy.png \
+  qt/res/icons/remove.png \
+  qt/res/icons/send.png \
+  qt/res/icons/send_dark.png \
+  qt/res/icons/governance.png \
+  qt/res/icons/governance_dark.png \
+  qt/res/icons/staking_active.png \
+  qt/res/icons/staking_inactive.png \
+  qt/res/icons/synced.png \
+  qt/res/icons/trade.png \
+  qt/res/icons/transaction0.png \
+  qt/res/icons/transaction2.png \
+  qt/res/icons/transaction_conflicted.png \
+  qt/res/icons/tx_inout.png \
+  qt/res/icons/tx_input.png \
+  qt/res/icons/tx_output.png \
+  qt/res/icons/tx_mined.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/res/icons/unit_bitcrexcoin.png \
+  qt/res/icons/unit_mbitcrexcoin.png \
+  qt/res/icons/unit_ubitcrexcoin.png \
+  qt/res/icons/unit_tbitcrexcoin.png \
+  qt/res/icons/unit_tmbitcrexcoin.png \
+  qt/res/icons/unit_tubitcrexcoin.png \
+  qt/res/icons/yesvote.png \
+  qt/res/icons/novote.png \
+  qt/res/icons/abstainvote.png \
+  qt/bitcrexcoin/res/img/bg-dashboard-banner.png \
+  qt/bitcrexcoin/res/img/bg-multi-number-dark.svg \
+  qt/bitcrexcoin/res/img/ic-check-locked.svg \
+  qt/bitcrexcoin/res/img/ic-nav-address.svg \
+  qt/bitcrexcoin/res/img/ic-update.svg \
+  qt/bitcrexcoin/res/img/bg-multi-number.svg \
+  qt/bitcrexcoin/res/img/ic-check-mint-off.svg \
+  qt/bitcrexcoin/res/img/ic-nav-cold-staking.svg \
+  qt/bitcrexcoin/res/img/ic-nav-cold-staking-active.svg \
+  qt/bitcrexcoin/res/img/ic-nav-dashboard-active.svg \
+  qt/bitcrexcoin/res/img/ic-wallet-status-locked.svg \
+  qt/bitcrexcoin/res/img/bg-splash.svg \
+  qt/bitcrexcoin/res/img/bg-splash.png \
+  qt/bitcrexcoin/res/img/ic-check-mint.svg \
+  qt/bitcrexcoin/res/img/ic-nav-dashboard-hover.svg \
+  qt/bitcrexcoin/res/img/ic-wallet-status-staking.svg \
+  qt/bitcrexcoin/res/img/ic-check-peers-off.svg \
+  qt/bitcrexcoin/res/img/ic-nav-dashboard.svg \
+  qt/bitcrexcoin/res/img/ic-wallet-status-unlocked.svg \
+  qt/bitcrexcoin/res/img/ic-check-peers.svg \
+  qt/bitcrexcoin/res/img/ic-nav-master-active.svg \
+  qt/bitcrexcoin/res/img/ic-watch-password-white.svg \
+  qt/bitcrexcoin/res/img/bg-welcome-container.jpg \
+  qt/bitcrexcoin/res/img/bg-welcome-container.png \
+  qt/bitcrexcoin/res/img/bg-welcome-container.svg \
+  qt/bitcrexcoin/res/img/bg-welcome-container@2x.png \
+  qt/bitcrexcoin/res/img/bg-welcome-container@3x.png \
+  qt/bitcrexcoin/res/img/ic-check-staking-off.svg \
+  qt/bitcrexcoin/res/img/ic-nav-master-hover.svg \
+  qt/bitcrexcoin/res/img/ic-watch-password.svg \
+  qt/bitcrexcoin/res/img/bg-welcome.jpg \
+  qt/bitcrexcoin/res/img/bg-welcome.svg \
+  qt/bitcrexcoin/res/img/bg-welcome@2x.jpg \
+  qt/bitcrexcoin/res/img/bg-welcome@3x.jpg \
+  qt/bitcrexcoin/res/img/bg-welcome.png \
+  qt/bitcrexcoin/res/img/ic-check-staking.svg \
+  qt/bitcrexcoin/res/img/ic-nav-master.svg \
+  qt/bitcrexcoin/res/img/img-dashboard-banner.jpg \
+  qt/bitcrexcoin/res/img/btn-radio-active.svg \
+  qt/bitcrexcoin/res/img/ic-check-sync-off.svg \
+  qt/bitcrexcoin/res/img/ic-nav-privacy-active.svg \
+  qt/bitcrexcoin/res/img/img-empty-contacts.svg \
+  qt/bitcrexcoin/res/img/btn-radio-off.svg \
+  qt/bitcrexcoin/res/img/ic-check-sync.png \
+  qt/bitcrexcoin/res/img/ic-nav-privacy-hover.svg \
+  qt/bitcrexcoin/res/img/img-empty-dark-contacts.svg \
+  qt/bitcrexcoin/res/img/ic-contact-arrow-down.svg \
+  qt/bitcrexcoin/res/img/ic-contact-arrow-down-white.svg \
+  qt/bitcrexcoin/res/img/ic-check-sync.svg \
+  qt/bitcrexcoin/res/img/ic-check-faq.svg \
+  qt/bitcrexcoin/res/img/ic-nav-privacy.svg \
+  qt/bitcrexcoin/res/img/img-empty-dark-error.svg \
+  qt/bitcrexcoin/res/img/ic-add-label.svg \
+  qt/bitcrexcoin/res/img/ic-pending.svg \
+  qt/bitcrexcoin/res/img/ic-check-theme-dark.svg \
+  qt/bitcrexcoin/res/img/ic-nav-receive-active.svg \
+  qt/bitcrexcoin/res/img/img-empty-dark-masternode.svg \
+  qt/bitcrexcoin/res/img/ic-add-liliac.svg \
+  qt/bitcrexcoin/res/img/ic-check-theme-light.svg \
+  qt/bitcrexcoin/res/img/ic-nav-receive-hover.svg \
+  qt/bitcrexcoin/res/img/img-empty-dark-multisend.svg \
+  qt/bitcrexcoin/res/img/ic-add-purple.svg \
+  qt/bitcrexcoin/res/img/ic-check-white.svg \
+  qt/bitcrexcoin/res/img/ic-nav-receive.svg \
+  qt/bitcrexcoin/res/img/img-empty-dark-peers.svg \
+  qt/bitcrexcoin/res/img/ic-add.svg \
+  qt/bitcrexcoin/res/img/ic-check.svg \
+  qt/bitcrexcoin/res/img/ic-nav-send-active.svg \
+  qt/bitcrexcoin/res/img/img-empty-dark-staking-off.svg \
+  qt/bitcrexcoin/res/img/img-empty-dark-staking-on.svg \
+  qt/bitcrexcoin/res/img/ic-address-book-grey.svg \
+  qt/bitcrexcoin/res/img/ic-chevron-left.svg \
+  qt/bitcrexcoin/res/img/ic-nav-send-hover.svg \
+  qt/bitcrexcoin/res/img/img-empty-dark-transactions.svg \
+  qt/bitcrexcoin/res/img/ic-address-book-white.svg \
+  qt/bitcrexcoin/res/img/ic-chevron-right.svg \
+  qt/bitcrexcoin/res/img/ic-nav-send.svg \
+  qt/bitcrexcoin/res/img/img-empty-error.svg \
+  qt/bitcrexcoin/res/img/ic-address-book.svg \
+  qt/bitcrexcoin/res/img/ic-clear-liliac.svg \
+  qt/bitcrexcoin/res/img/ic-nav-settings-active.svg \
+  qt/bitcrexcoin/res/img/img-empty-masternode.svg \
+  qt/bitcrexcoin/res/img/ic-address-send-white.svg \
+  qt/bitcrexcoin/res/img/ic-clear-purple.svg \
+  qt/bitcrexcoin/res/img/ic-nav-settings-hover.svg \
+  qt/bitcrexcoin/res/img/img-empty-multisend.svg \
+  qt/bitcrexcoin/res/img/ic-address-send.svg \
+  qt/bitcrexcoin/res/img/ic-close-white.svg \
+  qt/bitcrexcoin/res/img/ic-nav-settings.svg \
+  qt/bitcrexcoin/res/img/img-empty-peers.svg \
+  qt/bitcrexcoin/res/img/img-empty-privacy.svg \
+  qt/bitcrexcoin/res/img/img-empty-privacy-dark.svg \
+  qt/bitcrexcoin/res/img/ic-arrow-drop-down-white.svg \
+  qt/bitcrexcoin/res/img/ic-close.svg \
+  qt/bitcrexcoin/res/img/ic-radio-liliac-on.svg \
+  qt/bitcrexcoin/res/img/img-empty-staking-off.svg \
+  qt/bitcrexcoin/res/img/ic-arrow-drop-down.svg \
+  qt/bitcrexcoin/res/img/ic-coin-bic.svg \
+  qt/bitcrexcoin/res/img/ic-receive-off.svg \
+  qt/bitcrexcoin/res/img/img-empty-staking-on.svg \
+  qt/bitcrexcoin/res/img/ic-arrow-drop-up-white.svg \
+  qt/bitcrexcoin/res/img/ic-coin-zbic.png \
+  qt/bitcrexcoin/res/img/ic-receive-on.svg \
+  qt/bitcrexcoin/res/img/img-empty-transactions.svg \
+  qt/bitcrexcoin/res/img/ic-arrow-drop-up.svg \
+  qt/bitcrexcoin/res/img/ic-coin-zbic.svg \
+  qt/bitcrexcoin/res/img/ic-received.svg \
+  qt/bitcrexcoin/res/img/img-logo-bitcrexcoin.png \
+  qt/bitcrexcoin/res/img/ic-arrow-drop-white-down.svg \
+  qt/bitcrexcoin/res/img/ic-combo-box.svg \
+  qt/bitcrexcoin/res/img/ic-send.svg \
+  qt/bitcrexcoin/res/img/img-logo-bitcrexcoin@2x.png \
+  qt/bitcrexcoin/res/img/ic-arrow-purple-down.svg \
+  qt/bitcrexcoin/res/img/ic-connect.svg \
+  qt/bitcrexcoin/res/img/ic-submenu-lock.svg \
+  qt/bitcrexcoin/res/img/img-logo-bitcrexcoin@3x.png \
+  qt/bitcrexcoin/res/img/img-logo-bitcrexcoin.png \
+  qt/bitcrexcoin/res/img/ic-arrow-right-white.svg \
+  qt/bitcrexcoin/res/img/ic-arrow-left-white.svg \
+  qt/bitcrexcoin/res/img/ic-arrow-left.svg \
+  qt/bitcrexcoin/res/img/ic-copy-liliac.svg \
+  qt/bitcrexcoin/res/img/ic-submenu-staking.svg \
+  qt/bitcrexcoin/res/img/img-nav-logo-bitcrexcoin.png \
+  qt/bitcrexcoin/res/img/ic-arrow-right.svg \
+  qt/bitcrexcoin/res/img/ic-copy.svg \
+  qt/bitcrexcoin/res/img/ic-copy-big.svg \
+  qt/bitcrexcoin/res/img/ic-copy-big-white.svg \
+  qt/bitcrexcoin/res/img/ic-submenu-unlock.svg \
+  qt/bitcrexcoin/res/img/img-nav-logo.png \
+  qt/bitcrexcoin/res/img/ic-arrow-white-left.svg \
+  qt/bitcrexcoin/res/img/ic-exit.svg \
+  qt/bitcrexcoin/res/img/ic-switch-liliac-on.svg \
+  qt/bitcrexcoin/res/img/img-nav-logo.svg \
+  qt/bitcrexcoin/res/img/ic-arrow-white-right.svg \
+  qt/bitcrexcoin/res/img/ic-expand.svg \
+  qt/bitcrexcoin/res/img/ic-switch-off.svg \
+  qt/bitcrexcoin/res/img/img-qr-test-big.png \
+  qt/bitcrexcoin/res/img/ic-check-active.svg \
+  qt/bitcrexcoin/res/img/ic-folder.svg \
+  qt/bitcrexcoin/res/img/ic-switch-on.svg \
+  qt/bitcrexcoin/res/img/img-qr-test.png \
+  qt/bitcrexcoin/res/img/ic-check-box.svg \
+  qt/bitcrexcoin/res/img/ic-check-box-dark-active.svg \
+  qt/bitcrexcoin/res/img/ic-check-box-indeterminate.svg \
+  qt/bitcrexcoin/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/bitcrexcoin/res/img/ic-label-liliac.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-warning.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-mint.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-mint-inactive.svg \
+  qt/bitcrexcoin/res/img/ic-check-cold-staking.svg \
+  qt/bitcrexcoin/res/img/ic-check-cold-staking-off.svg \
+  qt/bitcrexcoin/res/img/ic-check-cold-staking-enabled.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-cs-contract.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-cs-contract-inactive.svg \
+  qt/bitcrexcoin/res/img/img-qr.svg \
+  qt/bitcrexcoin/res/img/ic-check-connect-off.svg \
+  qt/bitcrexcoin/res/img/ic-label.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-received.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-received.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-warning.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-mint.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-received-inactive.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/bitcrexcoin/res/img/img-welcome-step1.png \
+  qt/bitcrexcoin/res/img/ic-check-connect.svg \
+  qt/bitcrexcoin/res/img/ic-menu-hover.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-sent.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-sent-inactive.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-sent.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/bitcrexcoin/res/img/img-welcome-step2.png \
+  qt/bitcrexcoin/res/img/ic-check-dark.svg \
+  qt/bitcrexcoin/res/img/ic-mint.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-staked.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-staked-inactive.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-staked.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/bitcrexcoin/res/img/img-welcome-step3.png \
+  qt/bitcrexcoin/res/img/ic-check-liliac-on.svg \
+  qt/bitcrexcoin/res/img/ic-nav-address-active.svg \
+  qt/bitcrexcoin/res/img/ic-unlock-staking.svg \
+  qt/bitcrexcoin/res/img/img-welcome-step4.png \
+  qt/bitcrexcoin/res/img/ic-check-locked-off.svg \
+  qt/bitcrexcoin/res/img/ic-nav-address-hover.svg \
+  qt/bitcrexcoin/res/img/ic-update-liliac.svg \
+  qt/bitcrexcoin/res/img/ic-arrow-drop-down-purple.svg \
+  qt/bitcrexcoin/res/img/ic-arrow-drop-up-purple.svg \
+  qt/bitcrexcoin/res/img/ic-check-liliac-indeterminate.svg \
+  qt/bitcrexcoin/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-stake-delegated.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-stake-delegated-inactive.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-stake-hot.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-stake-hot-inactive.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-stake-hot.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-stake-hot-inactive.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-stake-delegated.svg \
+  qt/bitcrexcoin/res/img/dark/ic-transaction-stake-delegated-inactive.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-cs-contract.svg \
+  qt/bitcrexcoin/res/img/ic-transaction-cs-contract-inactive.svg \
+  qt/bitcrexcoin/res/img/ic-check-box-indeterminate.svg \
+  qt/bitcrexcoin/res/img/ani-loading-dark.gif \
+  qt/bitcrexcoin/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/bitcoinamountfield.cpp \
+  qt/bitcrexcoin/bitcrexcoingui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/blockexplorer.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/splashscreen.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/blockexplorer.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/governancepage.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/proposalframe.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactiondesc.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/bitcrexcoin/loadingdialog.cpp \
+  qt/zbiccontroldialog.cpp \
+  qt/bitcrexcoin/pwidget.cpp \
+  qt/bitcrexcoin/guitransactionsutils.cpp \
+  qt/bitcrexcoin/snackbar.cpp \
+  qt/bitcrexcoin/navmenuwidget.cpp \
+  qt/bitcrexcoin/lockunlock.cpp \
+  qt/bitcrexcoin/receivedialog.cpp \
+  qt/bitcrexcoin/furabstractlistitemdelegate.cpp \
+  qt/bitcrexcoin/txviewholder.cpp \
+  qt/bitcrexcoin/qtutils.cpp \
+  qt/bitcrexcoin/expandablebutton.cpp \
+  qt/bitcrexcoin/walletpassworddialog.cpp \
+  qt/bitcrexcoin/topbar.cpp \
+  qt/bitcrexcoin/txrow.cpp \
+  qt/bitcrexcoin/addressholder.cpp \
+  qt/bitcrexcoin/addressfilterproxymodel.cpp \
+  qt/bitcrexcoin/dashboardwidget.cpp \
+  qt/bitcrexcoin/coincontrolbicwidget.cpp \
+  qt/bitcrexcoin/addresslabelrow.cpp \
+  qt/bitcrexcoin/contactdropdownrow.cpp \
+  qt/bitcrexcoin/contactsdropdown.cpp \
+  qt/bitcrexcoin/optionbutton.cpp \
+  qt/bitcrexcoin/mninfodialog.cpp \
+  qt/bitcrexcoin/coldstakingmodel.cpp \
+  qt/bitcrexcoin/mnmodel.cpp \
+  qt/bitcrexcoin/masternodewizarddialog.cpp \
+  qt/bitcrexcoin/mnrow.cpp \
+  qt/bitcrexcoin/masternodeswidget.cpp \
+  qt/bitcrexcoin/myaddressrow.cpp \
+  qt/bitcrexcoin/csrow.cpp \
+  qt/bitcrexcoin/sendchangeaddressdialog.cpp \
+  qt/bitcrexcoin/sendconfirmdialog.cpp \
+  qt/bitcrexcoin/sendcustomfeedialog.cpp \
+  qt/bitcrexcoin/sendchangeaddressdialog.cpp \
+  qt/bitcrexcoin/sendmultirow.cpp \
+  qt/bitcrexcoin/send.cpp \
+  qt/bitcrexcoin/addnewaddressdialog.cpp \
+  qt/bitcrexcoin/addnewcontactdialog.cpp \
+  qt/bitcrexcoin/requestdialog.cpp \
+  qt/bitcrexcoin/receivewidget.cpp \
+  qt/bitcrexcoin/tooltipmenu.cpp \
+  qt/bitcrexcoin/addresseswidget.cpp \
+  qt/bitcrexcoin/defaultdialog.cpp \
+  qt/bitcrexcoin/denomgenerationdialog.cpp \
+  qt/bitcrexcoin/privacywidget.cpp \
+  qt/bitcrexcoin/coldstakingwidget.cpp \
+  qt/bitcrexcoin/settings/settingsbackupwallet.cpp \
+  qt/bitcrexcoin/settings/settingsbittoolwidget.cpp \
+  qt/bitcrexcoin/settings/settingsconsolewidget.cpp \
+  qt/bitcrexcoin/settings/settingsdisplayoptionswidget.cpp \
+  qt/bitcrexcoin/settings/settingsfaqwidget.cpp \
+  qt/bitcrexcoin/settings/settingsinformationwidget.cpp \
+  qt/bitcrexcoin/settings/settingsmainoptionswidget.cpp \
+  qt/bitcrexcoin/settings/settingsmultisenddialog.cpp \
+  qt/bitcrexcoin/settings/settingsmultisendwidget.cpp \
+  qt/bitcrexcoin/settings/settingssignmessagewidgets.cpp \
+  qt/bitcrexcoin/settings/settingswalletoptionswidget.cpp \
+  qt/bitcrexcoin/settings/settingswalletrepairwidget.cpp \
+  qt/bitcrexcoin/settings/settingswidget.cpp \
+  qt/bitcrexcoin/welcomecontentwidget.cpp \
+  qt/bitcrexcoin/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png \
+  qt/res/images/bitcrexcoin_logo_horizontal.png \
+  qt/res/images/downArrow_dark.png \
+  qt/res/images/downArrow_small_dark.png \
+  qt/res/images/downArrow_small.png \
+  qt/res/images/upArrow_small_dark.png \
+  qt/res/images/upArrow_small.png \
+  qt/res/images/leftArrow_small_dark.png \
+  qt/res/images/rightArrow_small_dark.png \
+  qt/res/images/qtreeview_selected.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/bitcrexcoin/res/css/style_dark.css \
+  qt/bitcrexcoin/res/css/style_light.css
+
+RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
+
+BITCOIN_RC = qt/res/bitcrexcoin-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_bitcrexcoin_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# bitcrexcoin-qt binary #
+qt_bitcrexcoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_bitcrexcoin_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_bitcrexcoin_qt_SOURCES = qt/bitcrexcoin.cpp
+if TARGET_DARWIN
+  qt_bitcrexcoin_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_bitcrexcoin_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_bitcrexcoin_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_bitcrexcoin_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_bitcrexcoin_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_bitcrexcoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_bitcrexcoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_bitcrexcoin_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/bitcrexcoinstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/bitcrexcoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/bitcrexcoin.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/bitcrexcoin_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name bitcrexcoin_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name bitcrexcoin $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_bitcrexcoin_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+bitcrexcoin_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_bitcrexcoin_qt_OBJECTS) qt/bitcrexcoin-qt$(EXEEXT) $(LIBBITCOINQT)
+
+bitcrexcoin_qt : qt/bitcrexcoin-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

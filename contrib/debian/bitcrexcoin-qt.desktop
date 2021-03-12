@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=BITCREXCOIN Core
+Comment=BITCREXCOIN P2P Cryptocurrency
+Comment[fr]=BITCREXCOIN, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=BITCREXCOIN, eşten eşe kriptografik sanal para birimi
+Exec=bitcrexcoin-qt %u
+Terminal=false
+Type=Application
+Icon=bitcrexcoin128
+MimeType=x-scheme-handler/bitcrexcoin;
+Categories=Office;Finance;
+StartupWMClass=BitcrexCoin-qt

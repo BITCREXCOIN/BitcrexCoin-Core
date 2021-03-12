@@ -1,0 +1,8 @@
+include_HEADERS += include/secp256k1_bich.h
+noinst_HEADERS += src/modules/bich/main_impl.h
+noinst_HEADERS += src/modules/bich/tests_impl.h
+if USE_BENCHMARK
+noinst_PROGRAMS += bench_bich
+bench_bich_SOURCES = src/bench_bich.c
+bench_bich_LDADD = libsecp256k1.la $(SECP_LIBS) $(COMMON_LIB)
+endif

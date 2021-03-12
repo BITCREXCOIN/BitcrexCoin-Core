@@ -1,0 +1,6 @@
+usr/local/bin/bitcrexcoin-qt usr/bin
+share/pixmaps/bitcrexcoin32.xpm usr/share/pixmaps
+share/pixmaps/bitcrexcoin16.xpm usr/share/pixmaps
+share/pixmaps/bitcrexcoin128.png usr/share/pixmaps
+debian/bitcrexcoin-qt.desktop usr/share/applications
+debian/bitcrexcoin-qt.protocol usr/share/kde4/services/
