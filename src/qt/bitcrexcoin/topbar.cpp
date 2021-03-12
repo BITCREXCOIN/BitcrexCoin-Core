@@ -441,7 +441,7 @@ void TopBar::setNumBlocks(int count)
             // Node synced
             // TODO: Set synced icon to pushButtonSync here..
             ui->pushButtonSync->setButtonClassStyle("cssClass", "btn-check-sync");
-            ui->pushButtonSync->setButtonText(tr("Synchronized"));
+            ui->pushButtonSync->setButtonText(tr("Synchronized - Block: %1").arg(QString::number(count)));
             progressBar->setRange(0, 100);
             progressBar->setValue(100);
             return;
