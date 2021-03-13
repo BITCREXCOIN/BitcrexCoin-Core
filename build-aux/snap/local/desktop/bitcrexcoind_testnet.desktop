@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=BITCREXCOIN Core Daemon SNAP
+Comment=testnet
+GenericName=BITCREXCOIN Digital Currency Daemon Client testnet network
+Exec=bitcrexcoin-core.daemon-testnet %u
+Terminal=true
+Type=Application
+Icon=${SNAP}/share/pixmaps/bitcrexcoin_testnet.png
+MimeType=x-scheme-handler/bic;
+Categories=X-Office;X-Finance;
+Keywords=internet;bitcrexcoin;zbic;core;wallet;daemon;testnet;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0
