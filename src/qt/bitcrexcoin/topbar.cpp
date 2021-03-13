@@ -563,6 +563,7 @@ void TopBar::updateBalances(const CAmount& balance, const CAmount& unconfirmedBa
     if (walletModel) {
         nLockedBalance = walletModel->getLockedBalance();
     }
+    ui->labelTitle1->setText(nLockedBalance > 0 ? tr("Available (Locked included)") : tr("Available"));
 
     // BIC Balance
     //CAmount nTotalBalance = balance + unconfirmedBalance + immatureBalance;
@@ -572,7 +573,7 @@ void TopBar::updateBalances(const CAmount& balance, const CAmount& unconfirmedBa
     CAmount matureZerocoinBalance = zerocoinBalance - unconfirmedZerocoinBalance - immatureZerocoinBalance;
 
     // Set
-    QString totalBic = GUIUtil::formatBalance(bicAvailableBalance, nDisplayUnit);
+    QString totalBic = GUIUtil::formatBalance(balance, nDisplayUnit); //GUIUtil::formatBalance(bicAvailableBalance, nDisplayUnit);
     QString totalzBic = GUIUtil::formatBalance(matureZerocoinBalance, nDisplayUnit, true);
     // Top
     ui->labelAmountTopBic->setText(totalBic);
