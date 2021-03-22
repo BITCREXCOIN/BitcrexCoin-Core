@@ -1,4 +1,4 @@
-﻿<TS language="hi_IN" version="2.1">
+<TS language="hi_IN" version="2.1">
 <context>
     <name>AddNewAddressDialog</name>
     <message>
