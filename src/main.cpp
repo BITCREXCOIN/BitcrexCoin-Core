@@ -3402,7 +3402,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     LogPrint("bench", "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs]\n", (unsigned)block.vtx.size(), 0.001 * (nTime1 - nTimeStart), 0.001 * (nTime1 - nTimeStart) / block.vtx.size(), nInputs <= 1 ? 0 : 0.001 * (nTime1 - nTimeStart) / (nInputs - 1), nTimeConnect * 0.000001);
 
     //PoW phase redistributed fees to miner. PoS stage destroys fees.
-    CAmount nExpectedMint = GetBlockValue(pindex->pprev->nHeight);
+    CAmount nExpectedMint = GetBlockValue(pindex->pprev->nHeight + 1);
     if (block.IsProofOfWork())
         nExpectedMint += nFees;
 
@@ -4539,8 +4539,8 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
         CTransaction tx = block.vtx[1];
         if (!tx.vout[1].IsZerocoinMint()) {
             int nIndex = tx.vout.size() - 1;
-            CAmount nBlockValue = GetBlockValue(nHeight - 1);
-            CAmount nMasternodeValue = GetMasternodePayment(nHeight - 1, nBlockValue, 0, false);
+            CAmount nBlockValue = GetBlockValue(nHeight);
+            CAmount nMasternodeValue = GetMasternodePayment(nHeight, nBlockValue, 0, false);
 
             if (tx.vout[nIndex].nValue != nMasternodeValue) {
                 return state.DoS(100, error("%s : rejected by check masternode lock-in at %d", __func__, nHeight),
